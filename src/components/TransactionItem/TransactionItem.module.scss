@@ -1,26 +1,65 @@
+// .item {
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 12px 16px;
+//   background: #fff;
+//   border-radius: 8px;
+//   margin-bottom: 10px;
+//   box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+// }
+
+// .title {
+//   font-size: 16px;
+//   font-weight: 500;
+// }
+
+// .amount {
+//   font-weight: 600;
+// }
+
+// .income {
+//   color: #2ecc71;
+// }
+
+// .expense {
+//   color: #e74c3c;
+// }
 .item {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  margin-bottom: 10px;
+}
+
+.main {
   display: flex;
   justify-content: space-between;
-  padding: 12px 16px;
-  background: #fff;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  margin-bottom: 6px;
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.amount {
   font-weight: 600;
 }
 
 .income {
-  color: #2ecc71;
+  color: #16a34a; // зелёный
+  font-weight: 600;
 }
 
 .expense {
-  color: #e74c3c;
+  color: #dc2626; // красный
+  font-weight: 600;
+}
+
+.meta {
+  font-size: 14px;
+  color: #6b7280;
+  display: flex;
+  gap: 12px;
+}
+
+.note {
+  font-style: italic;
+  color: #4b5563;
 }

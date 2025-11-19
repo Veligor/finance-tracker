@@ -44,11 +44,11 @@ export default function AddTransactionForm() {
 
       <input
         type="number"
-        value={amount}
-        onChange={(e) => setAmount(Number(e.target.value))}
         placeholder="Сумма"
+        value={amount === 0 ? "" : amount}
+        onChange={(e) => setAmount(Number(e.target.value))}
+        required
       />
-
       <select value={type} onChange={(e) => setType(e.target.value as any)}>
         <option value="income">Доход</option>
         <option value="expense">Расход</option>
