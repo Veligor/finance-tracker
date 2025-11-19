@@ -2,9 +2,10 @@ export type TransactionType = "income" | "expense";
 
 export interface Transaction {
   id: string;
-  type: TransactionType;
+  title: string; // НАЗВАНИЕ ТРАНЗАКЦИИ
+  type: "income" | "expense";
   amount: number;
   category: string;
-  date: string; // ISO: '2025-01-15'
-  note?: string; // необязательное поле
+  date: string;
+  note?: string;
 }
