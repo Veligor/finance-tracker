@@ -13,6 +13,7 @@ export default function AddTransactionForm() {
   const [type, setType] = useState<"income" | "expense">("expense");
   const [category, setCategory] = useState("");
   const [note, setNote] = useState("");
+  const [error, setError] = useState("");
 
   const clear = () => {
     setTitle("");
@@ -24,14 +25,28 @@ export default function AddTransactionForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !amount || Number(amount) <= 0) return;
+
+    if (!title.trim()) {
+      setError("Введите название операции");
+      return;
+    }
+    if (!amount || Number(amount) <= 0) {
+      setError("Введите корректную сумму");
+      return;
+    }
+    if (!category.trim()) {
+      setError("Введите категорию");
+      return;
+    }
+
+    setError(""); // очищаем ошибку
 
     const transaction: Transaction = {
       id: nanoid(),
       title: title.trim(),
       type,
       amount: Number(amount),
-      category: category.trim() || "Прочее",
+      category: category.trim(),
       date: new Date().toISOString(),
       note: note.trim() || undefined,
     };
@@ -40,6 +55,7 @@ export default function AddTransactionForm() {
     clear();
   };
 
+  
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
@@ -88,6 +104,7 @@ export default function AddTransactionForm() {
           </button>
         </div>
       </div>
+      {error && <div className={styles.error}>{error}</div>}
     </form>
   );
 }
