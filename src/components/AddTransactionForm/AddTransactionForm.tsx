@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useAppDispatch } from "../hooks";
-import { addTransaction } from "../features/transactions/transactionsSlice";
-import { Transaction } from "../features/transactions/types";
+import { useAppDispatch } from "../../hooks";
+import { addTransaction } from "../../features/transactions/transactionsSlice";
+import { Transaction } from "../../features/transactions/types";
 
 export default function AddTransactionForm() {
   const dispatch = useAppDispatch();
