@@ -103,3 +103,56 @@ body{
 
 /* util spacing */
 .mb-12 { margin-bottom:12px }
+/* ============ Адаптив для всех страниц ============ */
+
+@media (max-width: 900px) {
+  .appContainer {
+    padding: 10px !important;
+  }
+
+  h1, h2 {
+    text-align: center;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .balanceBox {
+    justify-self: center;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .form input,
+  .form select {
+    width: 100% !important;
+  }
+
+  .transactionCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .amount {
+    font-size: 18px !important;
+  }
+
+  .deleteBtn {
+    width: 100%;
+  }
+}
+.appContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}

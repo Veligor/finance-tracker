@@ -43,7 +43,7 @@ function Header() {
 
 export default function App() {
   return (
-    <div className="container">
+    <div className="appContainer">
       <Header />
       <div className="layout">
         <div>

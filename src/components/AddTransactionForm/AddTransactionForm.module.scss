@@ -4,10 +4,15 @@
   gap:12px;
 }
 
+// .row {
+//   display:flex;
+//   gap:10px;
+//   align-items:center;
+// }
 .row {
-  display:flex;
-  gap:10px;
-  align-items:center;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .input {
@@ -52,4 +57,9 @@
   color: #d93025;
   font-size: 14px;
   margin-top: 8px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }

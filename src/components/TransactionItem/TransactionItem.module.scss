@@ -46,3 +46,8 @@
 .expense {
   color:var(--red);
 }
+.transactionCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
