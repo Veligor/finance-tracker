@@ -1,26 +1,76 @@
-.add-transaction-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
+// .add-transaction-form {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   max-width: 400px;
 
-  label {
-    font-weight: bold;
-  }
+//   label {
+//     font-weight: bold;
+//   }
 
-  input, select {
-    padding: 5px;
-    font-size: 16px;
-  }
+//   input, select {
+//     padding: 5px;
+//     font-size: 16px;
+//   }
 
-  button {
-    padding: 8px 12px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    &:hover {
-      background-color: #45a049;
-    }
-  }
+//   button {
+//     padding: 8px 12px;
+//     background-color: #4caf50;
+//     color: white;
+//     border: none;
+//     cursor: pointer;
+//     &:hover {
+//       background-color: #45a049;
+//     }
+//   }
+// }
+.form {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.row {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.input {
+  flex:1;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e6e9ee;
+  background:#fff;
+  font-size:14px;
+}
+
+.select {
+  width:140px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e6e9ee;
+  background:#fff;
+  font-size:14px;
+}
+
+.actions {
+  display:flex;
+  justify-content:flex-end;
+}
+
+.addBtn {
+  padding:10px 14px;
+  border-radius:10px;
+  background:var(--accent);
+  color:white;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+}
+.addBtn:active{ transform:translateY(1px) }
+
+.label {
+  font-size:13px;
+  color:var(--muted);
 }

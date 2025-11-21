@@ -1,72 +1,93 @@
-import { useState } from "react";
-import { nanoid } from "@reduxjs/toolkit";
+import React, { useState } from "react";
+import styles from "./AddTransactionForm.module.scss";
 import { useAppDispatch } from "../../hooks";
 import { addTransaction } from "../../features/transactions/transactionsSlice";
 import { Transaction } from "../../features/transactions/types";
+import { nanoid } from "nanoid";
 
 export default function AddTransactionForm() {
   const dispatch = useAppDispatch();
 
   const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [type, setType] = useState<"income" | "expense">("income");
+  const [amount, setAmount] = useState<number | "">("");
+  const [type, setType] = useState<"income" | "expense">("expense");
   const [category, setCategory] = useState("");
   const [note, setNote] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const transaction: Transaction = {
-      id: nanoid(),
-      title,
-      type,
-      amount,
-      category,
-      date: new Date().toISOString(),
-      note,
-    };
-
-    dispatch(addTransaction(transaction));
-
+  const clear = () => {
     setTitle("");
-    setAmount(0);
+    setAmount("");
+    setType("expense");
     setCategory("");
     setNote("");
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim() || !amount || Number(amount) <= 0) return;
+
+    const transaction: Transaction = {
+      id: nanoid(),
+      title: title.trim(),
+      type,
+      amount: Number(amount),
+      category: category.trim() || "Прочее",
+      date: new Date().toISOString(),
+      note: note.trim() || undefined,
+    };
+
+    dispatch(addTransaction(transaction));
+    clear();
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Название"
-      />
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.row}>
+        <input
+          className={styles.input}
+          placeholder="Название (напр. Продукты)"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          className={styles.input}
+          placeholder="Сумма"
+          type="number"
+          value={amount}
+          onChange={(e) =>
+            setAmount(e.target.value === "" ? "" : Number(e.target.value))
+          }
+          required
+        />
+        <select
+          className={styles.select}
+          value={type}
+          onChange={(e) => setType(e.target.value as any)}
+        >
+          <option value="expense">Расход</option>
+          <option value="income">Доход</option>
+        </select>
+      </div>
 
-      <input
-        type="number"
-        placeholder="Сумма"
-        value={amount === 0 ? "" : amount}
-        onChange={(e) => setAmount(Number(e.target.value))}
-        required
-      />
-      <select value={type} onChange={(e) => setType(e.target.value as any)}>
-        <option value="income">Доход</option>
-        <option value="expense">Расход</option>
-      </select>
-
-      <input
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        placeholder="Категория"
-      />
-
-      <input
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-        placeholder="Заметка"
-      />
-
-      <button type="submit">Добавить</button>
+      <div className={styles.row}>
+        <input
+          className={styles.input}
+          placeholder="Категория (напр. Еда)"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
+        <input
+          className={styles.input}
+          placeholder="Заметка (необязательно)"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
+        <div className={styles.actions}>
+          <button className="addBtn" type="submit">
+            Добавить
+          </button>
+        </div>
+      </div>
     </form>
   );
 }
