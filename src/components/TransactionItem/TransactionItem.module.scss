@@ -1,53 +1,95 @@
+// .item {
+//   display:flex;
+//   justify-content:space-between;
+//   align-items:flex-start;
+//   gap:12px;
+//   padding:12px 14px;
+//   border-radius:10px;
+//   background:#fff;
+// }
+
+// .left {
+//   display:flex;
+//   flex-direction:column;
+//   gap:6px;
+// }
+
+// .title {
+//   font-weight:700;
+//   font-size:15px;
+// }
+
+// .meta {
+//   color:var(--muted);
+//   font-size:13px;
+//   display:flex;
+//   gap:12px;
+//   align-items:center;
+// }
+
+// .right {
+//   text-align:right;
+//   display:flex;
+//   flex-direction:column;
+//   gap:6px;
+//   align-items:flex-end;
+// }
+
+// .amount {
+//   font-weight:800;
+//   font-size:16px;
+// }
+
+// .income {
+//   color:var(--green);
+// }
+// .expense {
+//   color:var(--red);
+// }
+// .transactionCard {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
 .item {
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
-  padding:12px 14px;
-  border-radius:10px;
-  background:#fff;
-}
-
-.left {
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.title {
-  font-weight:700;
-  font-size:15px;
-}
-
-.meta {
-  color:var(--muted);
-  font-size:13px;
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.right {
-  text-align:right;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  align-items:flex-end;
-}
-
-.amount {
-  font-weight:800;
-  font-size:16px;
-}
-
-.income {
-  color:var(--green);
-}
-.expense {
-  color:var(--red);
-}
-.transactionCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category {
+  font-size: 13px;
+  color: #777;
+}
+
+.amount {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.expense {
+  color: #d9534f;
+}
+
+.income {
+  color: #28a745;
 }
