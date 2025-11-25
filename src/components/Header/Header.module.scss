@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .muted {
+    color: #999;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .balance-box {
+    background: #fff;
+    padding: 14px 20px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    text-align: right;
+
+    .label {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .value {
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+}
