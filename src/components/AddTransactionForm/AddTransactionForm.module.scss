@@ -177,3 +177,18 @@
     font-size: 17px;
   }
 }
+.error {
+  color: #ff4040;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.errorInput {
+  border-color: #ff4040 !important;
+  background: #ffecec !important;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
