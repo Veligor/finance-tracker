@@ -1,0 +1,45 @@
+.wrapper {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.chartBlock {
+  width: 100%;
+  height: 260px;
+}
+
+.list {
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 15px;
+}
+
+.color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.catName {
+  flex-grow: 1;
+}
+
+.percent {
+  font-weight: 600;
+}
