@@ -1,16 +1,19 @@
 import React from "react";
-import "./Sidebar.module.scss";
+import styles from "./Sidebar.module.scss";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <aside className="sidebar">
-      <div className="logo">FINANCE</div>
+    <aside className={styles.sidebar}>
+      <div className={styles.logo}>FINANCE</div>
 
-      <nav className="menu">
-        <button className="item active">📊 Dashboard</button>
-        <button className="item">💸 Операции</button>
-        <button className="item">📈 Графики</button>
-        <button className="item">⚙ Настройки</button>
+      <nav className={styles.menu}>
+        <Link to="/" className={styles.item}>
+          📊 Dashboard
+        </Link>
+        <Link to="/stats" className={styles.item}>
+          📈 Статистика
+        </Link>
       </nav>
     </aside>
   );

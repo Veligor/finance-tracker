@@ -1,62 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks";
+import Sidebar from "../components/Sidebar/Sidebar";
 import "../styles/global.scss";
-import { RootState } from "../app/store";
-import { useEffect, useState } from "react";
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const transactions = useAppSelector((s: RootState) => s.transactions.items);
+  const transactions = useAppSelector((s) => s.transactions.items);
   const [theme, setTheme] = useState("light");
+
   useEffect(() => {
     const saved = localStorage.getItem("theme") || "light";
     setTheme(saved);
-
-    if (saved === "dark") {
-      document.documentElement.classList.add("dark");
-    }
+    document.documentElement.classList.toggle("dark", saved === "dark");
   }, []);
 
   const toggleTheme = () => {
     const next = theme === "light" ? "dark" : "light";
     setTheme(next);
     localStorage.setItem("theme", next);
-
     document.documentElement.classList.toggle("dark", next === "dark");
   };
+
   const total = transactions.reduce(
     (acc, cur) => acc + (cur.type === "income" ? cur.amount : -cur.amount),
     0
   );
 
   return (
-    <div className="appContainer">
-      <header className="header">
-        <button
-          onClick={toggleTheme}
-          className="themeToggle"
-          title="Переключить тему"
-        >
-          {theme === "light" ? "🌙" : "☀️"}
-        </button>
+    <div className="app-layout">
+      {/* Sidebar слева */}
+      <Sidebar />
 
-        <div>
-          <div className="app-title">Personal Finance</div>
-          <div className="muted">Учёт доходов и расходов</div>
-        </div>
+      {/* Основная часть */}
+      <div className="content-area">
+        <header className="header">
+          <button
+            onClick={toggleTheme}
+            className="themeToggle"
+            title="Переключить тему"
+          >
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
 
-        <div className="balance-card">
           <div>
+            <div className="app-title">Personal Finance</div>
+            <div className="muted">Учёт доходов и расходов</div>
+          </div>
+
+          <div className="balance-card">
             <div className="balance-sub">Баланс</div>
             <div className="balance-value">{total} ₽</div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main className="layout">{children}</main>
+        {/* Router сюда кладёт Home / Stats */}
+        <main className="main-content">{children}</main>
+      </div>
     </div>
   );
 }
