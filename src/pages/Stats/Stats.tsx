@@ -96,12 +96,15 @@ import { RootState } from "../../app/store";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import CategoriesChart from "../../components/Charts/CategoriesChart";
 import LineChartBlock from "../../components/Charts/LineChartBlock";
+import styles from "./Stats.module.scss";
 
 export default function Stats() {
   const transactions = useAppSelector((s: RootState) => s.transactions.items);
 
   const [period, setPeriod] = useState<"week" | "month" | "year">("month");
   const [category, setCategory] = useState("all");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
   // список категорий
   const categories = useMemo(() => {
@@ -136,30 +139,71 @@ export default function Stats() {
   }, [transactions, period]);
 
   // фильтр по категории
-  const filtered = useMemo(() => {
-    if (category === "all") return filteredByPeriod;
-    return filteredByPeriod.filter((t) => t.category === category);
-  }, [filteredByPeriod, category]);
+//   const filtered = useMemo(() => {
+//     if (category === "all") return filteredByPeriod;
+//     return filteredByPeriod.filter((t) => t.category === category);
+//   }, [filteredByPeriod, category]);
+const filtered = useMemo(() => {
+  let data = [...transactions];
+
+  // Фильтр категории
+  if (category !== "all") {
+    data = data.filter((t) => t.category === category);
+  }
+
+  // Фильтр по дате "от"
+  if (dateFrom) {
+    const from = new Date(dateFrom).getTime();
+    data = data.filter((t) => new Date(t.date).getTime() >= from);
+  }
+
+  // Фильтр по дате "до"
+  if (dateTo) {
+    const to = new Date(dateTo).getTime();
+    data = data.filter((t) => new Date(t.date).getTime() <= to);
+  }
+
+  return data;
+}, [transactions, category, dateFrom, dateTo]);
+
 
   return (
     <div>
       <h2>Статистика</h2>
-      <div style={{ marginBottom: 20 }}>Аналитика доходов и расходов</div>
+      <div className={styles.filters}>
+        <div className={styles.datefilter}>
+          <label>От:</label>
+          <input
+            className={styles.input}
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+          />
+        </div>
 
+        <div className={styles.datefilter}>
+          <label>До:</label>
+          <input
+            className={styles.input}
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+          />
+        </div>
+      </div>
+      <div style={{ marginBottom: 20 }}>Аналитика доходов и расходов</div>
       {/* Кнопки периода */}
       <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
         <button onClick={() => setPeriod("week")}>Неделя</button>
         <button onClick={() => setPeriod("month")}>Месяц</button>
         <button onClick={() => setPeriod("year")}>Год</button>
       </div>
-
       {/* Фильтр по категориям */}
       <CategoryFilter
         categories={categories}
         value={category}
         onChange={setCategory}
       />
-
       {/* Графики */}
       <div style={{ display: "flex", gap: 20 }}>
         <div style={{ flex: 1 }}>
