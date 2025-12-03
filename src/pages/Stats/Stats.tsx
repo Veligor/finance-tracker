@@ -13,6 +13,10 @@ export default function Stats() {
   const [category, setCategory] = useState("all");
   const [period, setPeriod] = useState<"week" | "month" | "year">("month");
 
+  // Авто-сброс категории при смене типа
+  React.useEffect(() => {
+    setCategory("all");
+  }, [type]);
 
   // Фильтруем ТОЛЬКО НУЖНЫЕ категории по типу
   const categories = useMemo(() => {
