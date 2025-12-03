@@ -132,7 +132,7 @@ export default function Stats() {
         </div>
 
         <div className={styles.chartItem}>
-          <LineChartBlock transactions={filtered}  />
+          <LineChartBlock transactions={filtered} type={type} />
         </div>
       </div>
     </div>
@@ -158,90 +158,3 @@ export default function Stats() {
 
 
 
-
-
-
-
-
-// import React, { useMemo, useState } from "react";
-// import { useAppSelector } from "../../hooks";
-// import { RootState } from "../../app/store";
-// import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
-// import CategoriesChart from "../../components/Charts/CategoriesChart";
-// import LineChartBlock from "../../components/Charts/LineChartBlock";
-// import BarChartBlock from "../../components/Charts/BarChartBlock";
-// import styles from "./Stats.module.scss";
-
-// export default function Stats() {
-//   const transactions = useAppSelector((s: RootState) => s.transactions.items);
-
-//   // Тип операции: доходы / расходы
-//   const [type, setType] = useState<"income" | "expense">("income");
-
-//   // Категория
-//   const [category, setCategory] = useState("all");
-
-//   // Формируем список категорий по выбранному типу транзакции
-//   const categories = useMemo(() => {
-//     const set = new Set(
-//       transactions.filter((t) => t.type === type).map((t) => t.category)
-//     );
-//     return Array.from(set);
-//   }, [transactions, type]);
-
-//   // Основной фильтр
-//   const filtered = useMemo(() => {
-//     let arr = transactions.filter((t) => t.type === type);
-
-//     if (category !== "all") {
-//       arr = arr.filter((t) => t.category === category);
-//     }
-
-//     return arr;
-//   }, [transactions, type, category]);
-
-//   return (
-//     <div className={styles.statsPage}>
-//       <h2>Статистика</h2>
-
-//       {/* Доходы / Расходы */}
-//       <div className={styles.typeSwitch}>
-//         <button
-//           className={type === "income" ? styles.active : ""}
-//           onClick={() => setType("income")}
-//         >
-//           Доходы
-//         </button>
-
-//         <button
-//           className={type === "expense" ? styles.active : ""}
-//           onClick={() => setType("expense")}
-//         >
-//           Расходы
-//         </button>
-//       </div>
-
-//       {/* Категории */}
-//       <CategoryFilter
-//         categories={categories}
-//         value={category}
-//         onChange={setCategory}
-//       />
-
-//       {/* Графики */}
-//       <div className={styles.charts}>
-//         <div className={styles.chartBlock}>
-//           <CategoriesChart transactions={filtered} type={type} />
-//         </div>
-
-//         <div className={styles.chartBlock}>
-//           <LineChartBlock transactions={filtered} type={type} />
-//         </div>
-
-//         <div className={styles.chartBlock}>
-//           <BarChartBlock transactions={filtered} type={type} />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
