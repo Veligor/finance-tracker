@@ -1,0 +1,52 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal {
+  background: white;
+  padding: 20px 26px;
+  border-radius: 14px;
+  width: 320px;
+  animation: scaleIn 0.25s ease;
+}
+
+h3 {
+  margin: 0 0 10px 0;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancel {
+  padding: 8px 14px;
+  background: #e6e6e6;
+  border-radius: 8px;
+}
+
+.confirm {
+  padding: 8px 14px;
+  background: #ff4d4d;
+  border-radius: 8px;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.85); opacity: 0 }
+  to { transform: scale(1); opacity: 1 }
+}

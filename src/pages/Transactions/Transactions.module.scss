@@ -63,3 +63,15 @@
     transform: scale(1.1);
   }
 }
+.removing {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  filter: blur(1px);
+  transition: 0.35s ease;
+}
+
+// .removing {
+//   opacity: 0;
+//   transform: translateX(-20px);
+//   transition: opacity 0.45s ease, transform 0.45s ease;
+// }
