@@ -14,6 +14,9 @@ export default function Sidebar() {
         <Link to="/stats" className={styles.item}>
           📈 Статистика
         </Link>
+        <Link to="/transactions" className={styles.item}>
+          💸 Операции
+        </Link>
       </nav>
     </aside>
   );
