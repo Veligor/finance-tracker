@@ -14,6 +14,10 @@ export default function AddTransactionForm() {
   const [category, setCategory] = useState("");
   const [note, setNote] = useState("");
 
+
+
+  const textOnly = (value: string) => value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, "");
+
   // ошибки под полями
   const [errors, setErrors] = useState({
     title: "",
@@ -37,6 +41,10 @@ export default function AddTransactionForm() {
       nextErrors.title = "Введите название операции";
       valid = false;
     }
+  if (title.trim().length < 2) {
+    nextErrors.title = "Минимум 2 буквы";
+    valid = false;
+  }
 
    if (!amount || Number(amount) <= 0) {
      nextErrors.amount = "Введите корректную сумму";
@@ -77,14 +85,26 @@ export default function AddTransactionForm() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <div className={styles.field}>
-          <input
+          {/* <input
             className={`${styles.input} ${
               errors.title ? styles.errorInput : ""
             }`}
             placeholder="Название (например: Продукты)"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+          /> */}
+          <input
+            className={`${styles.input} ${
+              errors.title ? styles.errorInput : ""
+            }`}
+            placeholder="Название (например: Продукты)"
+            value={title}
+            onChange={(e) => {
+              const cleaned = textOnly(e.target.value);
+              setTitle(cleaned);
+            }}
           />
+
           {errors.title && <div className={styles.error}>{errors.title}</div>}
         </div>
 
@@ -137,11 +157,20 @@ export default function AddTransactionForm() {
       </div>
 
       <div className={styles.row}>
-        <input
+        {/* <input
           className={styles.input}
           placeholder="Категория (необязательно)"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+        /> */}
+        <input
+          className={styles.input}
+          placeholder="Категория (необязательно)"
+          value={category}
+          onChange={(e) => {
+            const cleaned = textOnly(e.target.value);
+            setCategory(cleaned);
+          }}
         />
 
         <input
