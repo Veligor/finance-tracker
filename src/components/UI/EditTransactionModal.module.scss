@@ -55,3 +55,18 @@ input, select {
   border-radius: 6px;
   cursor: pointer;
 }
+.error {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #e53935; 
+}
+
+.errorInput {
+  border: 1px solid #e53935;
+  background: rgba(229, 57, 53, 0.05);
+}
+
+.errorInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2);
+}

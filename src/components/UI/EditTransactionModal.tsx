@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { useAppDispatch } from "../../hooks";
-import { updateTransaction } from "../../features/transactions/transactionsSlice";
+import React, { useState, useEffect } from "react";
 import { Transaction } from "../../features/transactions/types";
 import styles from "./EditTransactionModal.module.scss";
 
 interface Props {
   transaction: Transaction;
-  onSave: (updatedTransaction: Transaction) => void; 
+  onSave: (updated: Transaction) => void;
   onCancel: () => void;
 }
 
@@ -15,26 +13,47 @@ export default function EditTransactionModal({
   onSave,
   onCancel,
 }: Props) {
-  const dispatch = useAppDispatch();
-
   const [title, setTitle] = useState(transaction.title);
-  const [amount, setAmount] = useState(transaction.amount);
+  const [amount, setAmount] = useState<number | "">(transaction.amount);
   const [type, setType] = useState<"income" | "expense">(transaction.type);
   const [category, setCategory] = useState(transaction.category);
   const [date, setDate] = useState(transaction.date.slice(0, 10));
 
-  const handleSave = () => {
-    const updatedTransaction: Transaction = {
-      ...transaction,
-      title,
-      amount,
-      type,
-      category,
-      date: new Date(date).toISOString(),
-    };
+  const [errors, setErrors] = useState({
+    title: "",
+    amount: "",
+  });
 
-    dispatch(updateTransaction(updatedTransaction));
-    onSave(updatedTransaction); // вызываем onSave, передав обновленную транзакцию
+  // --- валидация ---
+  useEffect(() => {
+    const nextErrors = { title: "", amount: "" };
+
+    if (!title.trim()) {
+      nextErrors.title = "Название обязательно";
+    } else if (title.trim().length < 2) {
+      nextErrors.title = "Минимум 2 символа";
+    }
+
+    if (amount === "" || Number(amount) <= 0) {
+      nextErrors.amount = "Введите корректную сумму";
+    }
+
+    setErrors(nextErrors);
+  }, [title, amount]);
+
+  const isValid = !errors.title && !errors.amount;
+
+  const handleSave = () => {
+    if (!isValid) return;
+
+    onSave({
+      ...transaction,
+      title: title.trim(),
+      amount: Number(amount),
+      type,
+      category: category.trim() || "Прочее",
+      date: new Date(date).toISOString(),
+    });
   };
 
   return (
@@ -43,14 +62,23 @@ export default function EditTransactionModal({
         <h3>Редактировать операцию</h3>
 
         <label>Название:</label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className={errors.title ? styles.errorInput : ""}
+        />
+        {errors.title && <div className={styles.error}>{errors.title}</div>}
 
         <label>Сумма:</label>
         <input
           type="number"
           value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
+          onChange={(e) =>
+            setAmount(e.target.value === "" ? "" : Number(e.target.value))
+          }
+          className={errors.amount ? styles.errorInput : ""}
         />
+        {errors.amount && <div className={styles.error}>{errors.amount}</div>}
 
         <label>Тип:</label>
         <select
@@ -72,7 +100,11 @@ export default function EditTransactionModal({
         />
 
         <div className={styles.buttons}>
-          <button className={styles.save} onClick={handleSave}>
+          <button
+            className={styles.save}
+            onClick={handleSave}
+            disabled={!isValid}
+          >
             Сохранить
           </button>
           <button className={styles.cancel} onClick={onCancel}>
