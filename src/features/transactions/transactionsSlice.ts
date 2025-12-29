@@ -15,15 +15,15 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {
         addTransaction(state, action: PayloadAction<Transaction>) {
-      const error = validateTransaction(action.payload);
+          const error = validateTransaction(action.payload);
 
-      if (error) {
-        console.warn("addTransaction rejected:", error, action.payload);
-        return;
-      }
-
-      state.items.push(action.payload);
-    },
+          if (error) {
+            console.warn("addTransaction rejected:", error, action.payload);
+            return;
+          }
+          console.log("Добавляем транзакцию", action.payload); // Добавь вывод
+          state.items.push(action.payload);
+        },
 
     deleteTransaction(state, action: PayloadAction<string>) {
       state.items = state.items.filter((t) => t.id !== action.payload);
