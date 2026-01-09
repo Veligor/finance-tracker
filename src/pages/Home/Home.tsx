@@ -26,8 +26,9 @@ export default function Home() {
       <StatsSummary income={income} expenses={expenses} />
 
       <div className="dashboard-charts">
-        <CategoriesChart transactions={transactions} /> {/* <-- ВСТАВЛЯЕМ */}
-        <LineChartBlock />
+        <CategoriesChart transactions={transactions} type="income" />{" "}
+        
+        <LineChartBlock type="expense" />
       </div>
 
       <div className="card mb-12">
