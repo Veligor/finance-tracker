@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks";
 import Sidebar from "../components/Sidebar/Sidebar";
 import "../styles/global.scss";
+import styles from "./MainLayout.module.scss"; 
 
 export default function MainLayout({
   children,
@@ -30,34 +31,36 @@ export default function MainLayout({
   );
 
   return (
-    <div className="app-layout">
+    <div className={styles.appLayout}>
       {/* Sidebar слева */}
       <Sidebar />
 
       {/* Основная часть */}
-      <div className="content-area">
-        <header className="header">
+      <div className={styles.contentArea}>
+        <header className={styles.header}>
           <button
             onClick={toggleTheme}
-            className="themeToggle"
+            className={styles.themeToggle}
             title="Переключить тему"
           >
             {theme === "light" ? "🌙" : "☀️"}
           </button>
 
           <div>
-            <div className="app-title">Personal Finance</div>
-            <div className="muted">Учёт доходов и расходов</div>
+            <div className={styles.appTitle}>Personal Finance</div>
+            <div className={styles.muted}>Учёт доходов и расходов</div>
           </div>
 
-          <div className="balance-card">
-            <div className="balance-sub">Баланс</div>
-            <div className="balance-value">{total} ₽</div>
+          <div className={styles.balanceCard}>
+            <div className={styles.balanceSub}>Баланс</div>
+            <div className={styles.balanceValue}>{total} ₽</div>
           </div>
         </header>
 
         {/* Router сюда кладёт Home / Stats */}
-        <main className="main-content">{children}</main>
+        <main className={styles.mainContent}>
+          <div className="appContainer">{children}</div>
+        </main>
       </div>
     </div>
   );

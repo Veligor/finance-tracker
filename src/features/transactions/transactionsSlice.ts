@@ -28,12 +28,6 @@ const transactionsSlice = createSlice({
     deleteTransaction(state, action: PayloadAction<string>) {
       state.items = state.items.filter((t) => t.id !== action.payload);
     },
-    // updateTransaction: (state, action) => {
-    //   const index = state.items.findIndex((t) => t.id === action.payload.id);
-    //   if (index !== -1) {
-    //     state.items[index] = action.payload;
-    //   }
-    // }
     updateTransaction(state, action: PayloadAction<Transaction>) {
       const error = validateTransaction(action.payload);
 
