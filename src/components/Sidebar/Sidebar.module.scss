@@ -1,22 +1,41 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/breakpoints' as *;
+
 .sidebar {
   width: 240px;
   padding: 24px;
+  transition: all 0.3s ease;
   background: #111827;
   color: #fff;
   min-height: 100vh;
+  display: flex;         // Добавляем, чтобы лучше контролировать контент
+  flex-direction: column;
+   @media (max-width: $lg) {
+    width: 72px;
+    padding: 24px 8px;   // Сохраняем верхний отступ как у десктопа
+    align-items: center; // Центруем иконки
+  }
 
   .logo {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 32px;
+    white-space: nowrap; // Чтобы текст не переносился перед исчезновением
+    @media (max-width: $lg) {
+    display: none; /* Текст исчезает, остаются только иконки в ссылках */
+  }
   }
 
   .menu {
     display: flex;
     flex-direction: column;
     gap: 12px;
-
+    width: 100%; // Чтобы кнопки тянулись
     .item {
+      display: flex;       // Делаем флексом, чтобы иконка и текст были в ряд
+      align-items: center;
+      gap: 12px;           // Расстояние между иконкой и текстом
+
       background: transparent;
       color: #e5e7eb;
       border: none;
@@ -25,6 +44,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: 0.2s;
+      text-decoration: none; // Если это Link
 
       &:hover {
         background: rgba(255, 255, 255, 0.1);
@@ -34,6 +54,20 @@
         background: #2563eb;
         color: white;
       }
+
+      /* ГЛАВНАЯ МАГИЯ ТУТ */
+       .label {
+        @media (max-width: $lg) {
+          display: none; // Скрываем текст внутри кнопки на планшетах
+        }
+      }
+
+      @media (max-width: $lg) {
+        justify-content: center; // Центруем иконку внутри кнопки
+        padding: 12px 0;         // Убираем боковые падинги
+        width: 100%;
+      }
     }
   }
 }
+// add tablet responsive behavior to sidebar

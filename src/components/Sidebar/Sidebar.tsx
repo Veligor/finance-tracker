@@ -9,13 +9,16 @@ export default function Sidebar() {
 
       <nav className={styles.menu}>
         <Link to="/" className={styles.item}>
-          📊 Dashboard
+          <span className={styles.icon}>📊</span>
+          <span className={styles.label}>Dashboard</span>
         </Link>
         <Link to="/stats" className={styles.item}>
-          📈 Статистика
+          <span className={styles.icon}>📈</span>
+          <span className={styles.label}>Статистика</span>
         </Link>
         <Link to="/transactions" className={styles.item}>
-          💸 Операции
+          <span className={styles.icon}>💸</span>
+          <span className={styles.label}>Операции</span>
         </Link>
       </nav>
     </aside>
