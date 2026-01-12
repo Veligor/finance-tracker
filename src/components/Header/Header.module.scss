@@ -6,6 +6,11 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
+  @media (max-width: $md) {
+    flex-direction: column;
+    gap: var(--space-3);
+
+  }
 }
 .appTitle {
   font-size: 32px;
