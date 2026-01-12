@@ -3,19 +3,35 @@
 
 .sidebar {
   width: 240px;
-  padding: 24px;
-  transition: all 0.3s ease;
   background: #111827;
   color: #fff;
   min-height: 100vh;
-  display: flex;         // Добавляем, чтобы лучше контролировать контент
+  padding: 24px;
+  display: flex;
   flex-direction: column;
-   @media (max-width: $lg) {
+
+  // mobile drawer
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 100;
+  @media (max-width: $lg) {
     width: 72px;
     padding: 24px 8px;   // Сохраняем верхний отступ как у десктопа
     align-items: center; // Центруем иконки
   }
+ &.open {
+    transform: translateX(0);
+  }
 
+  // desktop
+  @media (min-width: $lg) {
+    position: static;
+    transform: none;
+    
+  }
   .logo {
     font-size: 24px;
     font-weight: 700;
@@ -54,14 +70,12 @@
         background: #2563eb;
         color: white;
       }
-
-      /* ГЛАВНАЯ МАГИЯ ТУТ */
+        /* ГЛАВНАЯ МАГИЯ ТУТ */
        .label {
         @media (max-width: $lg) {
           display: none; // Скрываем текст внутри кнопки на планшетах
         }
       }
-
       @media (max-width: $lg) {
         justify-content: center; // Центруем иконку внутри кнопки
         padding: 12px 0;         // Убираем боковые падинги
@@ -71,3 +85,28 @@
   }
 }
 // add tablet responsive behavior to sidebar
+// .sidebar {
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   height: 100vh;
+//   transform: translateX(-100%);
+//   transition: transform 0.3s ease;
+//   z-index: 100;
+
+//   &.open {
+//     transform: translateX(0);
+//   }
+
+//   @media (min-width: $lg) {
+//     position: static;
+//     transform: none;
+//   }
+// }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 99;
+}
