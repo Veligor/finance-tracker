@@ -1,35 +1,55 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/breakpoints' as *;
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+}
+.appTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.muted {
+  color: #888;
+}
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  margin-left: 16px;
+  transition: opacity 0.2s ease;
+  color: var(--text);
+}
+.themeToggle:hover {
+  opacity: 0.7;
+}
+.balanceCard {
+  background: white;
+  padding: 20px 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
 
-  h1 {
-    font-size: 28px;
-    margin: 0;
-  }
+.balanceSub {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.balanceValue {
+  font-size: 28px;
+  font-weight: 700;
+}
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
 
-  .muted {
-    color: #999;
-    font-size: 14px;
-    margin-top: 4px;
-  }
-
-  .balance-box {
-    background: #fff;
-    padding: 14px 20px;
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    text-align: right;
-
-    .label {
-      color: #666;
-      font-size: 14px;
-    }
-
-    .value {
-      font-size: 22px;
-      font-weight: 700;
-    }
+  @media (max-width: $md) {
+    width: 100%;
+    justify-content: space-between;
   }
 }
