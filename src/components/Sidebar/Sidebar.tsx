@@ -15,8 +15,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <>
       <aside className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.logo}>FINANCE</div>
-        {/* {isOpen && <div className={styles.overlay} onClick={onClose} />} */}
-
         <nav className={styles.menu}>
           <Link to="/" className={styles.item}>
             <span className={styles.icon} onClick={handleClick}>

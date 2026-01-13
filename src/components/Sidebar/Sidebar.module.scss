@@ -2,65 +2,68 @@
 @use '../../styles/breakpoints' as *;
 
 .sidebar {
-  width: 240px;
-  background: #111827;
+   background: #111827;
   color: #fff;
   min-height: 100vh;
   padding: 24px;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
+  z-index: 100;
 
-  // mobile drawer
+  // 1. MOBILE 
   position: fixed;
   top: 0;
   left: 0;
+  width: 72px;
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 100;
-  @media (max-width: $lg) {
-    width: 72px;
-    padding: 24px 8px;   // Сохраняем верхний отступ как у десктопа
-    align-items: center; // Центруем иконки
-  }
- &.open {
+
+  &.open {
     transform: translateX(0);
   }
 
-  // desktop
+  // 2. TABLET (от 768px до 1023px)
+  @media (min-width: $md) and (max-width: ($lg - 1px)) {
+    position: static;
+    transform: none;
+    width: 72px;
+    padding: 24px 8px;
+    align-items: center;
+    
+    .logo { display: none; } 
+  }
+
+  // 3. DESKTOP (от 1024px и выше)
   @media (min-width: $lg) {
     position: static;
     transform: none;
+    width: 240px;
     
   }
+
   .logo {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 32px;
-    white-space: nowrap; // Чтобы текст не переносился перед исчезновением
-    @media (max-width: $lg) {
-    display: none; /* Текст исчезает, остаются только иконки в ссылках */
-  }
+    white-space: nowrap;
   }
 
   .menu {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    width: 100%; // Чтобы кнопки тянулись
-    .item {
-      display: flex;       // Делаем флексом, чтобы иконка и текст были в ряд
-      align-items: center;
-      gap: 12px;           // Расстояние между иконкой и текстом
+    width: 100%;
 
-      background: transparent;
-      color: #e5e7eb;
-      border: none;
-      text-align: left;
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       padding: 12px 10px;
       border-radius: 8px;
+      text-decoration: none;
+      color: #e5e7eb;
+      transition: background 0.2s;
       cursor: pointer;
-      transition: 0.2s;
-      text-decoration: none; // Если это Link
 
       &:hover {
         background: rgba(255, 255, 255, 0.1);
@@ -70,43 +73,27 @@
         background: #2563eb;
         color: white;
       }
-        /* ГЛАВНАЯ МАГИЯ ТУТ */
-       .label {
+
+      .label {
         @media (max-width: $lg) {
-          display: none; // Скрываем текст внутри кнопки на планшетах
+          display: none;
         }
       }
+
       @media (max-width: $lg) {
-        justify-content: center; // Центруем иконку внутри кнопки
-        padding: 12px 0;         // Убираем боковые падинги
-        width: 100%;
+        justify-content: center;
+        padding: 12px 0;
       }
     }
   }
 }
-// add tablet responsive behavior to sidebar
-// .sidebar {
-//   position: fixed;
-//   left: 0;
-//   top: 0;
-//   height: 100vh;
-//   transform: translateX(-100%);
-//   transition: transform 0.3s ease;
-//   z-index: 100;
-
-//   &.open {
-//     transform: translateX(0);
-//   }
-
-//   @media (min-width: $lg) {
-//     position: static;
-//     transform: none;
-//   }
-// }
-
-.overlay {
+  .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 99;
+
+  @media (min-width: $md) {
+    display: none;
+  }
 }
