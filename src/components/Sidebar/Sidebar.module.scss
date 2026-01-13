@@ -29,16 +29,13 @@
     width: 72px;
     padding: 24px 8px;
     align-items: center;
-    
-    .logo { display: none; } 
   }
 
   // 3. DESKTOP (от 1024px и выше)
   @media (min-width: $lg) {
     position: static;
     transform: none;
-    width: 240px;
-    
+    width: 240px; 
   }
 
   .logo {
@@ -46,6 +43,9 @@
     font-weight: 700;
     margin-bottom: 32px;
     white-space: nowrap;
+     @media (max-width: $lg) {
+      display: none;
+    }
   }
 
   .menu {

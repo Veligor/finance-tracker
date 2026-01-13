@@ -1,71 +1,118 @@
 @use '../../styles/tokens' as *;
 @use '../../styles/breakpoints' as *;
 
+/* =========================
+   BASE — MOBILE FIRST
+   ========================= */
+
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  @media (max-width: $md) {
-    flex-direction: column;
-    gap: var(--space-3);
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  width: 100%;
+  text-align: center;
+}
 
-  }
+.headerLeft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
+
 .appTitle {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 4px;
 }
+
 .muted {
-  color: #888;
+  font-size: 14px;
+  color: var(--text-muted);
+ 
 }
+
 .themeToggle {
   background: none;
   border: none;
   font-size: 22px;
   cursor: pointer;
-  margin-left: 16px;
-  transition: opacity 0.2s ease;
   color: var(--text);
 }
-.themeToggle:hover {
-  opacity: 0.7;
-}
-.balanceCard {
-  background: white;
-  padding: 20px 28px;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
 
-.balanceSub {
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-.balanceValue {
-  font-size: 28px;
-  font-weight: 700;
-}
-.headerLeft {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-
-  @media (max-width: $md) {
-    width: 100%;
-    justify-content: space-between;
-  }
-}
 .burger {
-  display: none;
   font-size: 24px;
   background: none;
   border: none;
   cursor: pointer;
+}
 
-  @media (max-width: $md) {
-    display: block;
+/* Баланс */
+.balanceCard {
+  background: var(--card-bg);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin-inline: auto; //  центр на мобиле
+}
+
+.balanceSub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.balanceValue {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* =========================
+   TABLET ≥ md
+   ========================= */
+
+@media (min-width: $md) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .headerLeft {
+    width: auto;
+    gap: var(--space-4);
+  }
+
+  .burger {
+    display: none; 
+  }
+
+  .appTitle {
+    font-size: 28px;
+  }
+
+  .balanceCard {
+    margin-inline: 0; 
+  }
+  
+}
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center; //  центр под заголовком
+  gap: 4px;
+}
+
+/* =========================
+   DESKTOP ≥ lg
+   ========================= */
+
+@media (min-width: $lg) {
+  .appTitle {
+    font-size: 32px;
+  }
+
+  .balanceValue {
+    font-size: 28px;
   }
 }

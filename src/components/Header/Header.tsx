@@ -44,15 +44,10 @@ export default function Header({ onBurgerClick }: HeaderProps) {
           {theme === "light" ? "🌙" : "☀️"}
         </button>
       </div>
-      {/* <button className={styles.burger} onClick={onBurgerClick}>
-        ☰
-      </button> */}
-
-      <div>
+      <div className={styles.titleBlock}>
         <div className={styles.appTitle}>Personal Finance</div>
         <div className={styles.muted}>Учёт доходов и расходов</div>
       </div>
-
       <div className={styles.balanceCard}>
         <div className={styles.balanceSub}>Баланс</div>
         <div className={styles.balanceValue}>{balance} ₽</div>
