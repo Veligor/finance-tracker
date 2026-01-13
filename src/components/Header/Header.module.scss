@@ -13,7 +13,24 @@
   width: 100%;
   text-align: center;
 }
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  text-align: center;   
+  gap: 4px;
+}
 .headerLeft {
   display: flex;
   align-items: center;
@@ -77,12 +94,15 @@
     justify-content: space-between;
     text-align: left;
   }
-
-  .headerLeft {
-    width: auto;
-    gap: var(--space-4);
+ .center {
+    flex: 1;
+    justify-content: center;
   }
 
+  .titleBlock {
+    align-items: flex-start;
+    align-items: center;
+  }
   .burger {
     display: none; 
   }
@@ -90,17 +110,14 @@
   .appTitle {
     font-size: 28px;
   }
-
   .balanceCard {
+  
+    
     margin-inline: 0; 
   }
-  
-}
-.titleBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: center; //  центр под заголовком
-  gap: 4px;
+  .balanceSub {
+      text-align: center;   
+  }
 }
 
 /* =========================
