@@ -1,18 +1,33 @@
+@use "./../../styles/breakpoints" as *;
+
 .summary {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  // display: flex;
+  // justify-content: space-between;
+  // gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: $md) {
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
+/* Desktop */
+@media (min-width: $lg) {
+  .summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .card {
   background: #ffffff;
   padding: 12px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   text-align: center;
-  flex: 1;
+  // flex: 1;
 }
-
 .title {
   font-size: 14px;
   color: #777;
@@ -24,9 +39,8 @@
     font-size: 10px;
   }
 }
-
 .amount {
   font-size: 24px;
   font-weight: 700;
-  color: #0b8b4d; /* Зеленый для положительного баланса */
+  color: #0b8b4d; 
 }
