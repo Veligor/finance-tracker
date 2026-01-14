@@ -17,11 +17,11 @@ export default function MainLayout({
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       {/* Основная часть */}
       <div className={styles.contentArea}>
-        <Header onBurgerClick={() => setIsSidebarOpen(true)} />
-        {/* Router сюда кладёт Home / Stats */}
-        <main className={styles.mainContent}>
-          <div className="appContainer">{children}</div>
-        </main>
+        <div className={styles.pageContainer}>
+          <Header onBurgerClick={() => setIsSidebarOpen(true)} />
+          {/* Router сюда кладёт Home / Stats */}
+          <main className={styles.mainContent}>{children}</main>
+        </div>
       </div>
     </div>
   );

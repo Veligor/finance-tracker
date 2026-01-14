@@ -1,14 +1,18 @@
+@use '../styles/breakpoints' as *;
+
 .appLayout {
   display: flex;
   min-height: 100vh;
-  width: 100%;
   overflow: hidden;
 }
-.contentArea {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+ .contentArea {
+  flex: 1;         
   min-width: 0;
+ }
+.pageContainer {
+  width: 100%;
+   margin-inline: auto;
+  padding-inline: var(--space-4);
 }
 .balanceCard {
   background: white;
@@ -16,7 +20,6 @@
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
-
 .balanceSub {
   color: #777;
   font-size: 14px;
@@ -27,5 +30,11 @@
   font-weight: 700;
 }
 .mainContent {
-  padding: 24px;
+  padding: var(--space-5) 0;
+}
+@media (min-width: $lg) {
+  .pageContainer {
+    max-width: 1280px;
+    margin-inline: auto;
+  }
 }
