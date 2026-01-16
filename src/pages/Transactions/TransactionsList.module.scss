@@ -1,0 +1,55 @@
+@use '../../styles/breakpoints' as *;
+
+.transactions {
+  width: 100%;
+}
+
+/* ===== MOBILE ===== */
+.cardView {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.amount {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ===== DESKTOP ===== */
+.tableView {
+  display: none;
+}
+
+@media (min-width: $md) {
+  .cardView {
+    display: none;
+  }
+
+  .tableView {
+    display: block;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+}

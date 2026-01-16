@@ -6,6 +6,15 @@ import {
   updateTransaction,
   addTransaction,
 } from "../../features/transactions/transactionsSlice";
+// TransactionsPage
+//  ├─ TransactionsFilters
+//  ├─ TransactionsActions (CSV)
+//  ├─ TransactionsList
+//  │    ├─ TransactionsTable   (md+)
+//  │    └─ TransactionsCards   (mobile)
+//  └─ Modals / Toasts
+
+import { TransactionsList } from "./TransactionsList";
 import EditTransactionModal from "../../components/UI/EditTransactionModal";
 import ConfirmModal from "../../components/UI/ConfirmModal";
 import ToastUndo from "../../components/UI/ToastUndo";
@@ -189,7 +198,7 @@ export default function TransactionsPage() {
         </label>
       </div>
 
-      {/* СПИСОК ТРАНЗАКЦИЙ */}
+      {/* СПИСОК ТРАНЗАКЦИЙ
       <div className={styles.list}>
         {filtered.length === 0 && <div>Нет операций</div>}
         {filtered.map((t) => (
@@ -228,7 +237,13 @@ export default function TransactionsPage() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+      <TransactionsList
+        items={filtered}
+        onEdit={handleEdit}
+        onDelete={confirmDelete}
+        removingId={removing}
+      />
 
       {/* МОДАЛКА РЕДАКТИРОВАНИЯ */}
       {showEditModal && selectedTransaction && (
