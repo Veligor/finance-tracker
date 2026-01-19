@@ -8,6 +8,8 @@ interface Props {
   removingId: string | null;
   selectedIds: string[];
   onToggleSelect: (id: string) => void;
+  onToggleSelectAll: () => void;
+  allSelected: boolean;
 }
 
 export function TransactionsList({
@@ -15,8 +17,10 @@ export function TransactionsList({
   onEdit,
   onDelete,
   removingId,
-  selectedIds, 
+  selectedIds,
   onToggleSelect,
+  allSelected,
+  onToggleSelectAll,
 }: Props) {
   return (
     <div className={styles.transactions}>

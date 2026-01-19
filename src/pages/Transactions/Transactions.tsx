@@ -27,6 +27,7 @@ export default function TransactionsPage() {
   const transactions = useAppSelector((s: RootState) => s.transactions.items);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
+  const [bulkConfirmOpen, setBulkConfirmOpen] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
   const [type, setType] = useState<"all" | "income" | "expense">("all");
@@ -170,7 +171,20 @@ export default function TransactionsPage() {
   };
 
   const clearSelection = () => setSelectedIds([]);
-// item
+
+  //Select all / Deselect all
+  const allSelected =
+    selectedIds.length === filtered.length && filtered.length > 0;
+
+  const toggleSelectAll = () => {
+    if (allSelected) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filtered.map((t) => t.id));
+    }
+  };
+const bulkActive = selectedIds.length > 0;
+
   return (
     <div className={styles.wrapper}>
       <h2>Операции</h2>
@@ -207,21 +221,40 @@ export default function TransactionsPage() {
           <input type="file" accept=".csv" hidden onChange={handleImportCSV} />
         </label>
       </div>
-      {/* СПИСОК ТРАНЗАКЦИЙ */}
-      {selectedIds.length > 0 && (
+     
+      {/*  Модальное окно подтверждения */}
+      {bulkConfirmOpen && (
+        <ConfirmModal
+          title="Удалить выбранные операции?"
+          text={`Будет удалено операций: ${selectedIds.length}. Это действие нельзя отменить.`}
+          onConfirm={() => {
+            selectedIds.forEach((id) => dispatch(deleteTransaction(id)));
+            setSelectedIds([]);
+            setBulkConfirmOpen(false);
+          }}
+          onCancel={() => setBulkConfirmOpen(false)}
+        />
+      )}
+
+      {/* Панель массовых действий */}
+      {bulkActive && (
         <div className={styles.bulkBar}>
           <span>Выбрано: {selectedIds.length}</span>
 
+    
           <button
-            onClick={() => {
-              selectedIds.forEach((id) => dispatch(deleteTransaction(id)));
-              clearSelection();
-            }}
+            className={styles.selectAllBtn}
+            onClick={toggleSelectAll}
+            title={allSelected ? "Снять выделение" : "Выбрать все"}
           >
-            🗑 Удалить
+           
+            {allSelected ? "☑" : "☐"}
           </button>
 
-          <button onClick={clearSelection}>✖ Снять</button>
+          <button onClick={() => setBulkConfirmOpen(true)}>🗑 Удалить</button>
+          <button onClick={() => setSelectedIds([])} title="Закрыть">
+            ✖
+          </button>
         </div>
       )}
 
@@ -232,6 +265,8 @@ export default function TransactionsPage() {
         removingId={removing}
         selectedIds={selectedIds}
         onToggleSelect={toggleSelect}
+        onToggleSelectAll={toggleSelectAll}
+        allSelected={allSelected}
       />
       {/* МОДАЛКА РЕДАКТИРОВАНИЯ */}
       {showEditModal && selectedTransaction && (
