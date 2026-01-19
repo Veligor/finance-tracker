@@ -6,6 +6,8 @@ interface Props {
   onEdit: (t: Transaction) => void;
   onDelete: (id: string) => void;
   removingId: string | null;
+  selectedIds: string[];
+  onToggleSelect: (id: string) => void;
 }
 
 export function TransactionsList({
@@ -13,6 +15,8 @@ export function TransactionsList({
   onEdit,
   onDelete,
   removingId,
+  selectedIds, 
+  onToggleSelect,
 }: Props) {
   return (
     <div className={styles.transactions}>
@@ -31,6 +35,13 @@ export function TransactionsList({
           <tbody>
             {items.map((t) => (
               <tr key={t.id}>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(t.id)}
+                    onChange={() => onToggleSelect(t.id)}
+                  />
+                </td>
                 <td>{new Date(t.date).toLocaleDateString()}</td>
                 <td>{t.title}</td>
                 <td>{t.category}</td>
@@ -60,6 +71,12 @@ export function TransactionsList({
               removingId === t.id ? styles.removing : ""
             }`}
           >
+            <input
+              type="checkbox"
+              checked={selectedIds.includes(t.id)}
+              onChange={() => onToggleSelect(t.id)}
+              className={styles.checkbox}
+            />
             <div className={styles.title}>{t.title}</div>
             <div className={styles.meta}>
               {t.category} · {new Date(t.date).toLocaleDateString()}
